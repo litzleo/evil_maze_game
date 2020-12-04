@@ -454,7 +454,7 @@ var gioco_tanga = (function(undefined) {
     };
 
 
-    function copyState(destPlan, sourcePlan, destPG, sourcePG){
+    function copyState(destPlan, sourcePlan, destPG, sourcePG){console.log("yay");
 
       destPlan = createArray(plan_dim.h, plan_dim.w, plan_dim.l);
 
@@ -957,7 +957,7 @@ var gioco_tanga = (function(undefined) {
                             else rotateMir(-PI/2, plan[height][pg.x][pg.y].color);
                         }
                     break;
-                    case 'L':
+                    case 32:
                         if(saved){
                           copyState(plan, savedPlan, pg, savedPg);
                         } else {
