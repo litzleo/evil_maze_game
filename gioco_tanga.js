@@ -455,9 +455,9 @@ var gioco_tanga = (function(undefined) {
     };
 
 
-    function copyState(destPlan, sourcePlan, destPG, sourcePG){
+    function copyPlan(sourcePlan){
 
-      destPlan = createArray(plan_dim.h, plan_dim.w, plan_dim.l);
+      var destPlan = createArray(plan_dim.h, plan_dim.w, plan_dim.l);
 
       for(var i=0;i<plan_dim.h;i++){
         for(var j=0;j<plan_dim.w;j++){
@@ -490,9 +490,14 @@ var gioco_tanga = (function(undefined) {
         }
       }
 
-      destPG = {x:sourcePG.x, y:sourcePG.y, dir:sourcePG.dir, toDie:sourcePG.toDie, timeOfDeath:sourcePG.timeOfDeath};
-        
+      return destPlan;
+      
 
+    }
+    
+    function copyPG(sourcePG){
+        var destPG = {x:sourcePG.x, y:sourcePG.y, dir:sourcePG.dir, toDie:sourcePG.toDie, timeOfDeath:sourcePG.timeOfDeath};
+        return destPG;
     }
 
     function finalizeRotateMir(){
@@ -962,12 +967,13 @@ var gioco_tanga = (function(undefined) {
                     break;
                     case 'L':
                         if(saved){
-                          copyState(plan, savedPlan, pg, savedPg);
+                          plan=copyPlan(savedPlan);
+                          pg=copyPlan(savedPg);
                         } else {
-                          copyState(savedPlan, plan, savedPg, pg);
+                          savedPlan=copyPlan(plan);
+                          savedPg=copyPlan(pg);
                         }
                         saved = !saved;
-                        console.log(savedPlan);
                     break;
                 }
                 if(pgHasMoved){
