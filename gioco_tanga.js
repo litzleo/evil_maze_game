@@ -969,6 +969,7 @@ var gioco_tanga = (function(undefined) {
                           copyState(savedPlan, plan, savedPg, pg);
                         }
                         saved = !saved;
+                        console.log(plan, savedPlan, pg, savedPg);
                     break;
                 }
                 if(pgHasMoved){
