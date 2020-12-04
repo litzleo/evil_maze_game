@@ -23,6 +23,8 @@ var gioco_tanga = (function(undefined) {
     var displayHeight = false;
     var sound = {};
 
+    var savedPlan, savedPg, saved = false;
+
 
 
 
@@ -452,6 +454,44 @@ var gioco_tanga = (function(undefined) {
         sound.theme.loop();
     };
 
+
+    function copyState(destPlan, sourcePlan, destPG, sourcePG){
+
+      destPlan = createArray(plan_dim.h, plan_dim.w, plan_dim.l);
+
+      for(var i=0;i<plan_dim.h;i++){
+        for(var j=0;j<plan_dim.w;j++){
+          for(var k=0;k<plan_dim.l;k++){
+            var tile = sourcePlan[i][j][k];
+            destPlan[i][j][k].type = tile.type;
+            destPlan[i][j][k].walls = tile.walls;
+
+            switch(tile.type){
+              case "mirror":
+                destPlan[i][j][k].mirrors = tile.mirrors;
+                destPlan[i][j][k].color = tile.color;
+              break;
+              case "plate":
+                destPlan[i][j][k].color = tile.color;
+              break;
+              case "lever":
+                destPlan[i][j][k].toggled = tile.toggled;
+                destPlan[i][j][k].color = tile.color;
+              break;
+              case "ladder":
+                destPlan[i][j][k].destination = tile.destination;
+              break;
+              case "exit":
+                destPlan[i][j][k].exit = tile.exit;
+              break;
+            }
+          }
+        }
+      }
+
+      destPG = {x:sourcePG.x, y:sourcePG.y, dir:sourcePG.dir, toDie:sourcePG.toDie, timeOfDeath:sourcePG.timeOfDeath};
+
+    }
 
     function finalizeRotateMir(){
         for(var i=0;i<plan_dim.h;i++){
@@ -916,6 +956,14 @@ var gioco_tanga = (function(undefined) {
                             }
                             else rotateMir(-PI/2, plan[height][pg.x][pg.y].color);
                         }
+                    break;
+                    case 32:
+                        if(saved){
+                          copyState(plan, savedPlan, pg, savedPg);
+                        } else {
+                          copyState(savedPlan, plan, savedPg, pg);
+                        }
+                        saved = !saved;
                     break;
                 }
                 if(pgHasMoved){
