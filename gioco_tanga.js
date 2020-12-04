@@ -966,6 +966,7 @@ var gioco_tanga = (function(undefined) {
                         }
                     break;
                     case 'L':
+                        change = true;
                         if(saved){
                           plan=copyPlan(savedPlan);
                           pg=copyPG(savedPg);
