@@ -104,6 +104,7 @@ var gioco_tanga = (function(undefined) {
         activePlate = {x : -1, y : -1};
         exit = {h : 0, x : 0, y : 0, e : 'W'};
         change = true;
+        savedPlan = null, savedPg = null, saved = false;
 
         plan = createArray(plan_dim.h, plan_dim.w, plan_dim.l);
         for(var i=0;i<plan_dim.h;i++){
@@ -958,7 +959,7 @@ var gioco_tanga = (function(undefined) {
                             else rotateMir(-PI/2, plan[height][pg.x][pg.y].color);
                         }
                     break;
-                    case 32:
+                    case 'L':
                         if(saved){
                           copyState(plan, savedPlan, pg, savedPg);
                         } else {
