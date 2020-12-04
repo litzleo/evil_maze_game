@@ -462,6 +462,7 @@ var gioco_tanga = (function(undefined) {
         for(var j=0;j<plan_dim.w;j++){
           for(var k=0;k<plan_dim.l;k++){
             var tile = sourcePlan[i][j][k];
+            destPlan[i][j][k] = {};
             destPlan[i][j][k].type = tile.type;
             destPlan[i][j][k].walls = tile.walls;
 
