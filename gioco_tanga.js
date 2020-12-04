@@ -968,10 +968,10 @@ var gioco_tanga = (function(undefined) {
                     case 'L':
                         if(saved){
                           plan=copyPlan(savedPlan);
-                          pg=copyPlan(savedPg);
+                          pg=copyPG(savedPg);
                         } else {
                           savedPlan=copyPlan(plan);
-                          savedPg=copyPlan(pg);
+                          savedPg=copyPG(pg);
                         }
                         saved = !saved;
                     break;
