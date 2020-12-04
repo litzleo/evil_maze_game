@@ -104,7 +104,7 @@ var gioco_tanga = (function(undefined) {
         activePlate = {x : -1, y : -1};
         exit = {h : 0, x : 0, y : 0, e : 'W'};
         change = true;
-        savedPlan = null, savedPg = null, saved = false;
+        saved = false;
 
         plan = createArray(plan_dim.h, plan_dim.w, plan_dim.l);
         for(var i=0;i<plan_dim.h;i++){
@@ -455,7 +455,7 @@ var gioco_tanga = (function(undefined) {
     };
 
 
-    function copyState(destPlan, sourcePlan, destPG, sourcePG){console.log("yay");
+    function copyState(destPlan, sourcePlan, destPG, sourcePG){
 
       destPlan = createArray(plan_dim.h, plan_dim.w, plan_dim.l);
 
@@ -491,6 +491,8 @@ var gioco_tanga = (function(undefined) {
       }
 
       destPG = {x:sourcePG.x, y:sourcePG.y, dir:sourcePG.dir, toDie:sourcePG.toDie, timeOfDeath:sourcePG.timeOfDeath};
+        
+    console.log(destPlan, sourcePlan, destPG, sourcePG);
 
     }
 
