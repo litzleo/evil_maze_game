@@ -23,7 +23,7 @@ var gioco_tanga = (function(undefined) {
     var displayHeight = false;
     var sound = {};
 
-    var savedPlan, savedPg, saved = false;
+    var savedPlan = {}, savedPg = {}, saved = false;
 
 
 
@@ -492,7 +492,6 @@ var gioco_tanga = (function(undefined) {
 
       destPG = {x:sourcePG.x, y:sourcePG.y, dir:sourcePG.dir, toDie:sourcePG.toDie, timeOfDeath:sourcePG.timeOfDeath};
         
-    console.log(destPlan, sourcePlan, destPG, sourcePG);
 
     }
 
@@ -962,14 +961,12 @@ var gioco_tanga = (function(undefined) {
                         }
                     break;
                     case 'L':
-                        console.log(plan, savedPlan, pg, savedPg);
                         if(saved){
                           copyState(plan, savedPlan, pg, savedPg);
                         } else {
                           copyState(savedPlan, plan, savedPg, pg);
                         }
                         saved = !saved;
-                        console.log(plan, savedPlan, pg, savedPg);
                     break;
                 }
                 if(pgHasMoved){
