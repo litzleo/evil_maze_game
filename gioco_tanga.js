@@ -451,7 +451,6 @@ var gioco_tanga = (function(undefined) {
         plan[exit.h][exit.x][exit.y].type = "exit";
         plan[exit.h][exit.x][exit.y].exit = exit.e;
 
-        sound.theme.loop();
     };
 
 
@@ -908,6 +907,7 @@ var gioco_tanga = (function(undefined) {
     };
 
     public.keyPressed = function() {
+        if(!sound.theme.isPlaying())sound.theme.loop();
         switch(state){
             case "game":
                 var pgHasMoved = false;
@@ -957,7 +957,7 @@ var gioco_tanga = (function(undefined) {
                             else rotateMir(-PI/2, plan[height][pg.x][pg.y].color);
                         }
                     break;
-                    case 32:
+                    case 'L':
                         if(saved){
                           copyState(plan, savedPlan, pg, savedPg);
                         } else {
