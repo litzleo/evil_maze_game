@@ -553,7 +553,7 @@ var gioco_tanga = (function(undefined) {
 
 
     public.draw = function(to_redraw) {//tutti i metodi pubblici (accessibili da fuori) iniziano con public.
-        if(to_redraw || change || state !== "game" || displayHeight || pg.toDie){
+        if(to_redraw || change || state !== "game" || displayHeight || displaySaved || displayLoaded || pg.toDie){
             push();
             if(pg.timeOfDeath !== undefined){
                 var amp = map(new Date().getTime(), pg.timeOfDeath,  pg.timeOfDeath + EXPLOSION_TIME,
