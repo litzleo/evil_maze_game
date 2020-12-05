@@ -21,6 +21,8 @@ var gioco_tanga = (function(undefined) {
     var st_time;
     var text_time = 1200;
     var displayHeight = false;
+    var displaySaved = false;
+    var displayLoaded = false;
     var sound = {};
 
     var savedPlan = {}, savedPg = {}, saved = false;
@@ -757,6 +759,34 @@ var gioco_tanga = (function(undefined) {
                 }
                 else displayHeight = false;
             }
+            if(displaySaved){
+                if(new Date().getTime() < st_time + text_time){
+                    textSize(60);
+                    textAlign(CENTER);
+                    if(new Date().getTime() < st_time+text_time/3){
+                        fill(20,240,255, map(new Date().getTime(), st_time,st_time+text_time/3, 0, 255));
+                    }
+                    else{
+                        fill(20,240,255, map(new Date().getTime(), st_time+text_time/3,st_time+text_time, 255, 0));
+                    }
+                    text("Savefile saved", 800, 800);
+                }
+                else displaySaved = false;
+            }
+            if(displayLoaded){
+                if(new Date().getTime() < st_time + text_time){
+                    textSize(60);
+                    textAlign(CENTER);
+                    if(new Date().getTime() < st_time+text_time/3){
+                        fill(20,240,255, map(new Date().getTime(), st_time,st_time+text_time/3, 0, 255));
+                    }
+                    else{
+                        fill(20,240,255, map(new Date().getTime(), st_time+text_time/3,st_time+text_time, 255, 0));
+                    }
+                    text("Savefile loaded", 800, 800);
+                }
+                else displayLoaded = false;
+            }
             if(pg.timeOfDeath !== undefined){
                 var timeExplosion = new Date().getTime() - pg.timeOfDeath;
                 var expSlot = floor(map(timeExplosion, 0, EXPLOSION_TIME, 0, 80));
@@ -969,9 +999,13 @@ var gioco_tanga = (function(undefined) {
                         if(saved){
                           plan=copyPlan(savedPlan);
                           pg=copyPG(savedPg);
+                          displaySaved = true;
+                          st_time = new Date().getTime();
                         } else {
                           savedPlan=copyPlan(plan);
                           savedPg=copyPG(pg);
+                          displayLoaded = true;
+                          st_time = new Date().getTime();
                         }
                         saved = !saved;
                     break;
