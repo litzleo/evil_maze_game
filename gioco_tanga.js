@@ -104,7 +104,6 @@ var gioco_tanga = (function(undefined) {
         activePlate = {x : -1, y : -1};
         exit = {h : 0, x : 0, y : 0, e : 'W'};
         change = true;
-        saved = false;
 
         plan = createArray(plan_dim.h, plan_dim.w, plan_dim.l);
         for(var i=0;i<plan_dim.h;i++){
