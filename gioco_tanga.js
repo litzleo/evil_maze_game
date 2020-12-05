@@ -999,12 +999,12 @@ var gioco_tanga = (function(undefined) {
                         if(saved){
                           plan=copyPlan(savedPlan);
                           pg=copyPG(savedPg);
-                          displaySaved = true;
+                          displayLoaded = true;
                           st_time = new Date().getTime();
                         } else {
                           savedPlan=copyPlan(plan);
                           savedPg=copyPG(pg);
-                          displayLoaded = true;
+                          displaySaved = true;
                           st_time = new Date().getTime();
                         }
                         saved = !saved;
