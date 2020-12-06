@@ -27,7 +27,7 @@ var gioco_tanga = (function(undefined) {
     var sound = {};
     var azerty = false;
 
-    var savedPlan = {}, savedPg = {}, savedHeight. saved = false;
+    var savedPlan = {}, savedPg = {}, savedHeight, saved = false;
 
 
 
