@@ -983,7 +983,7 @@ var gioco_tanga = (function(undefined) {
                             vKey = "Q";
                         break;
                     }
-                switch(key){
+                switch(vKey){
                     case "F":
                         azerty = !azerty;
                         layoutChanged = true;
