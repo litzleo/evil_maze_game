@@ -974,14 +974,15 @@ var gioco_tanga = (function(undefined) {
                     checkDieCondition();
                 }
                 var vKey = key;
-                if(azerty){
-                    case "W":
-                        vKey = "Z";
-                    break;
-                    case "A":
-                        vKey = "Q";
-                    break;
-                }
+                if(azerty)
+                    switch(key){
+                        case "W":
+                            vKey = "Z";
+                        break;
+                        case "A":
+                            vKey = "Q";
+                        break;
+                    }
                 switch(key){
                     case "F":
                         azerty = !azerty;
