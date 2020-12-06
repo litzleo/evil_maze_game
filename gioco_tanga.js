@@ -976,11 +976,11 @@ var gioco_tanga = (function(undefined) {
                 var vKey = key;
                 if(azerty)
                     switch(key){
-                        case "W":
-                            vKey = "Z";
+                        case "Z":
+                            vKey = "W";
                         break;
-                        case "A":
-                            vKey = "Q";
+                        case "Q":
+                            vKey = "A";
                         break;
                     }
                 switch(vKey){
