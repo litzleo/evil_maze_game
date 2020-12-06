@@ -27,7 +27,7 @@ var gioco_tanga = (function(undefined) {
     var sound = {};
     var azerty = false;
 
-    var savedPlan = {}, savedPg = {}, saved = false;
+    var savedPlan = {}, savedPg = {}, savedHeight. saved = false;
 
 
 
@@ -1037,11 +1037,13 @@ var gioco_tanga = (function(undefined) {
                         if(saved){
                           plan=copyPlan(savedPlan);
                           pg=copyPG(savedPg);
+                          height = savedHeight;
                           displayLoaded = true;
                           st_time = new Date().getTime();
                         } else {
                           savedPlan=copyPlan(plan);
                           savedPg=copyPG(pg);
+                          savedHeight = height;
                           displaySaved = true;
                           st_time = new Date().getTime();
                         }
