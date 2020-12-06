@@ -24,6 +24,7 @@ var gioco_tanga = (function(undefined) {
     var displaySaved = false;
     var displayLoaded = false;
     var sound = {};
+    var azerty = false;
 
     var savedPlan = {}, savedPg = {}, saved = false;
 
@@ -951,41 +952,41 @@ var gioco_tanga = (function(undefined) {
                 if(plan[height][pg.x][pg.y].type === "exit"){
                     if(key === exit.e)finish(true);
                 }
-                if((key === "W" || key === "A" || key === "S" || key === "D") && pg.dir !== key){
+                if((key === 87 || key === 65 || key === 83 || key === 68) && pg.dir !== key){
                     pg.dir = key;
                     change = true;
                     checkDieCondition();
                 }
                 switch(key){
-                    case 'W':
+                    case 87:
                         if(plan[height][pg.x][pg.y].walls.indexOf("W")===-1 &&
                                 plan[height][pg.x][pg.y-1].type !== "mirror"){
                                 pg.y--;
                                 pgHasMoved = true;
                             }
                     break;
-                    case 'A':
+                    case 65:
                         if(plan[height][pg.x][pg.y].walls.indexOf("A")===-1 &&
                                 plan[height][pg.x-1][pg.y].type !== "mirror"){
                                 pg.x--;
                                 pgHasMoved = true;
                             }
                     break;
-                    case 'S':
+                    case 83:
                         if(plan[height][pg.x][pg.y].walls.indexOf("S")===-1 &&
                                 plan[height][pg.x][pg.y+1].type !== "mirror"){
                                 pg.y++;
                                 pgHasMoved = true;
                             }
                     break;
-                    case 'D':
+                    case 68:
                         if(plan[height][pg.x][pg.y].walls.indexOf("D")===-1 &&
                                 plan[height][pg.x+1][pg.y].type !== "mirror"){
                                 pg.x++;
                                 pgHasMoved = true;
                             }
                     break;
-                    case 'E':
+                    case 69:
                         if(plan[height][pg.x][pg.y].type === "lever"){
                             plan[height][pg.x][pg.y].toggled = !plan[height][pg.x][pg.y].toggled;
                             if(plan[height][pg.x][pg.y].toggled){
@@ -994,7 +995,7 @@ var gioco_tanga = (function(undefined) {
                             else rotateMir(-PI/2, plan[height][pg.x][pg.y].color);
                         }
                     break;
-                    case 'L':
+                    case 76:
                         change = true;
                         if(saved){
                           plan=copyPlan(savedPlan);
