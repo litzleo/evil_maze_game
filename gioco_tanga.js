@@ -23,6 +23,7 @@ var gioco_tanga = (function(undefined) {
     var displayHeight = false;
     var displaySaved = false;
     var displayLoaded = false;
+    var layoutChanged = false;
     var sound = {};
     var azerty = false;
 
@@ -554,7 +555,7 @@ var gioco_tanga = (function(undefined) {
 
 
     public.draw = function(to_redraw) {//tutti i metodi pubblici (accessibili da fuori) iniziano con public.
-        if(to_redraw || change || state !== "game" || displayHeight || displaySaved || displayLoaded || pg.toDie){
+        if(to_redraw || change || state !== "game" || displayHeight || displaySaved || displayLoaded || layoutChanged || pg.toDie){
             push();
             if(pg.timeOfDeath !== undefined){
                 var amp = map(new Date().getTime(), pg.timeOfDeath,  pg.timeOfDeath + EXPLOSION_TIME,
@@ -788,6 +789,21 @@ var gioco_tanga = (function(undefined) {
                 }
                 else displayLoaded = false;
             }
+            if(layoutChanged){
+                if(new Date().getTime() < st_time + text_time){
+                    textSize(60);
+                    textAlign(CENTER);
+                    if(new Date().getTime() < st_time+text_time/3){
+                        fill(20,240,255, map(new Date().getTime(), st_time,st_time+text_time/3, 0, 255));
+                    }
+                    else{
+                        fill(20,240,255, map(new Date().getTime(), st_time+text_time/3,st_time+text_time, 255, 0));
+                    }
+                    if(azerty)text("You have selected Azerty", 800, 800);
+                    else text("You have selected Qwerty", 800, 800);
+                }
+                else displayLoaded = false;
+            }
             if(pg.timeOfDeath !== undefined){
                 var timeExplosion = new Date().getTime() - pg.timeOfDeath;
                 var expSlot = floor(map(timeExplosion, 0, EXPLOSION_TIME, 0, 80));
@@ -952,41 +968,55 @@ var gioco_tanga = (function(undefined) {
                 if(plan[height][pg.x][pg.y].type === "exit"){
                     if(key === exit.e)finish(true);
                 }
-                if((key === 87 || key === 65 || key === 83 || key === 68) && pg.dir !== key){
+                if((key === "W" || key === "A" || key === "S" || key === "D") && pg.dir !== key){
                     pg.dir = key;
                     change = true;
                     checkDieCondition();
                 }
+                var vKey = key;
+                if(azerty){
+                    case "W":
+                        vKey = "Z";
+                    break;
+                    case "A":
+                        vKey = "Q";
+                    break;
+                }
                 switch(key){
-                    case 87:
+                    case "F":
+                        azerty = !azerty;
+                        layoutChanged = true;
+                        st_time = new Date().getTime();
+                    break;
+                    case "W":
                         if(plan[height][pg.x][pg.y].walls.indexOf("W")===-1 &&
                                 plan[height][pg.x][pg.y-1].type !== "mirror"){
                                 pg.y--;
                                 pgHasMoved = true;
                             }
                     break;
-                    case 65:
+                    case "A":
                         if(plan[height][pg.x][pg.y].walls.indexOf("A")===-1 &&
                                 plan[height][pg.x-1][pg.y].type !== "mirror"){
                                 pg.x--;
                                 pgHasMoved = true;
                             }
                     break;
-                    case 83:
+                    case "S":
                         if(plan[height][pg.x][pg.y].walls.indexOf("S")===-1 &&
                                 plan[height][pg.x][pg.y+1].type !== "mirror"){
                                 pg.y++;
                                 pgHasMoved = true;
                             }
                     break;
-                    case 68:
+                    case "D":
                         if(plan[height][pg.x][pg.y].walls.indexOf("D")===-1 &&
                                 plan[height][pg.x+1][pg.y].type !== "mirror"){
                                 pg.x++;
                                 pgHasMoved = true;
                             }
                     break;
-                    case 69:
+                    case "E":
                         if(plan[height][pg.x][pg.y].type === "lever"){
                             plan[height][pg.x][pg.y].toggled = !plan[height][pg.x][pg.y].toggled;
                             if(plan[height][pg.x][pg.y].toggled){
@@ -995,7 +1025,7 @@ var gioco_tanga = (function(undefined) {
                             else rotateMir(-PI/2, plan[height][pg.x][pg.y].color);
                         }
                     break;
-                    case 76:
+                    case "L":
                         change = true;
                         if(saved){
                           plan=copyPlan(savedPlan);
