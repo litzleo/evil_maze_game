@@ -974,7 +974,13 @@ var gioco_tanga = (function(undefined) {
                         case "Q":
                             vKey = "A";
                         break;
-                    }console.log(vKey);
+                        case "W":
+                            vKey = "Z";
+                        break;
+                        case "A":
+                            vKey = "Q";
+                        break;
+                    }
                 if(plan[height][pg.x][pg.y].type === "exit"){
                     if(vKey === exit.e)finish(true);
                 }
