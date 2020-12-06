@@ -965,14 +965,6 @@ var gioco_tanga = (function(undefined) {
         switch(state){
             case "game":
                 var pgHasMoved = false;
-                if(plan[height][pg.x][pg.y].type === "exit"){
-                    if(key === exit.e)finish(true);
-                }
-                if((key === "W" || key === "A" || key === "S" || key === "D") && pg.dir !== key){
-                    pg.dir = key;
-                    change = true;
-                    checkDieCondition();
-                }
                 var vKey = key;
                 if(azerty)
                     switch(key){
@@ -982,7 +974,15 @@ var gioco_tanga = (function(undefined) {
                         case "Q":
                             vKey = "A";
                         break;
-                    }
+                    }console.log(vKey);
+                if(plan[height][pg.x][pg.y].type === "exit"){
+                    if(vKey === exit.e)finish(true);
+                }
+                if((vKey === "W" || vKey === "A" || vKey === "S" || vKey === "D") && pg.dir !== vKey){
+                    pg.dir = vKey;
+                    change = true;
+                    checkDieCondition();
+                }
                 switch(vKey){
                     case "F":
                         azerty = !azerty;
