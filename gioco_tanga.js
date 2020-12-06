@@ -802,7 +802,7 @@ var gioco_tanga = (function(undefined) {
                     if(azerty)text("You have selected Azerty", 800, 800);
                     else text("You have selected Qwerty", 800, 800);
                 }
-                else displayLoaded = false;
+                else layoutChanged = false;
             }
             if(pg.timeOfDeath !== undefined){
                 var timeExplosion = new Date().getTime() - pg.timeOfDeath;
